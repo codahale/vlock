@@ -1,0 +1,6 @@
+.classpath
+.manager
+.project
+lib_managed
+project/boot
+target
