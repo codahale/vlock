@@ -16,5 +16,13 @@ class TimestampSpec extends Spec with MustMatchers {
       
       timestamps.sort { _ < _ } must equal (timestamps.reverse)
     }
+    
+    it("can select the larger of two timestamps") {
+      val one = Timestamp(1)
+      val two = Timestamp(2)
+      
+      (one.max(two)) must equal (two)
+      (two.max(one)) must equal (two)
+    }
   }
 }

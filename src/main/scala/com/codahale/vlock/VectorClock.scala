@@ -32,10 +32,9 @@ case class VectorClock(clock: Clock, versions: Map[Node, Timestamp])
   def merge(that: VectorClock): VectorClock = VectorClock(clock, merge(versions, that.versions))
   
   private def merge(a: Map[Node, Timestamp], b: Map[Node, Timestamp]): Map[Node, Timestamp] = {
-    def max(x: Timestamp, y: Timestamp) = if (x < y) y else x
     val c = MMap[Node, Timestamp]() ++ b
     for ((n, t) <- a) {
-      c(n) = max(c.getOrElse(n, t), t)
+      c(n) = t.max(c.getOrElse(n, t))
     }
     return Map() ++ c
   }
